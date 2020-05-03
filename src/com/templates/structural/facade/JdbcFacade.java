@@ -2,6 +2,7 @@ package com.templates.structural.facade;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +11,14 @@ public class JdbcFacade {
 
     DbSingleton instance = null;
 
-    public JdbcFacade() {
+    public JdbcFacade() throws SQLException {
         instance = DbSingleton.getInstance();
     }
 
     public int createTable() {
         int count = 0;
         try {
-            Connection connection = instance.;
+            Connection connection = instance.getConnection();
             Statement statement = connection.createStatement();
             count = statement.executeUpdate("CREATE TABLE Address (ID INTEGER, StreetName VARCHAR(20), City VARCHAR(20))");
             statement.close();
